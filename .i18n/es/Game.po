@@ -34,7 +34,7 @@ msgid "A mapping §0 is injectiv, if:\n"
 "\n"
 "§1"
 msgstr ""
-"Una aplicación §0 es inyectiva si y solo si se cumple:\n"
+"Una aplicación §9 es inyectiva si y solo si se cumple:\n"
 "\n"
 "§1"
 
