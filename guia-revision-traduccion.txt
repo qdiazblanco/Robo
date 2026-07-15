@@ -1,0 +1,133 @@
+=====================================================================
+GUÍA DE REVISIÓN DE LA TRADUCCIÓN ESPAÑOLA DE ROBO
+=====================================================================
+
+Estado: la PRETRADUCCIÓN COMPLETA (829 entradas) está en la rama
+Spanish-translation del fork qdiazblanco/Robo, en .i18n/es/Game.po
+(más Game.json generado). Falta la REVISIÓN HUMANA, que se reparte
+mediante issues y pull requests.
+
+
+HERRAMIENTAS
+---------------------------------------------------------------------
+
+  revision-es.html      (fuera del repo)
+      Leer las 829 entradas en 3 columnas (alemán | inglés | español),
+      marcar revisadas y anotar correcciones.
+
+  .i18n/po2json.py      (en el repo)
+      Regenerar Game.json desde Game.po:  python3 .i18n/po2json.py es
+
+  .i18n/check_po.py     (en el repo)
+      Comprobar placeholders §n y entradas vacías:
+      python3 .i18n/check_po.py es
+
+  GitHub Actions        (.github/workflows/ en el repo)
+      Validación automática de cada PR y regeneración del json en
+      cada push (ver más abajo).
+
+
+LA PÁGINA revision-es.html
+---------------------------------------------------------------------
+
+  - Se abre con doble clic; no necesita internet ni servidor. Cada
+    persona la usa en su ordenador: el progreso (casillas y notas) se
+    guarda en SU navegador, no en el archivo.
+  - Casilla por entrada = "ya revisada"; contador y filtro arriba.
+  - Campo de nota por entrada para apuntar la corrección propuesta.
+  - Botón "exportar/importar progreso": intercambiarse el JSON para
+    fusionar el trabajo de ambos (las notas ajenas quedan marcadas).
+  - Botón "informe de correcciones": junta todas las notas en un
+    texto listo para pegar en el issue correspondiente.
+
+
+ORGANIZACIÓN DEL TRABAJO
+---------------------------------------------------------------------
+
+  - Milestone "Revisión español" con 16 issues: 15 bloques por
+    planetas (40-92 entradas cada uno) y 1 issue transversal de
+    terminología y glosario.
+  - La numeración #N de los issues se refiere a las ENTRADAS de la
+    página HTML (mismo orden que el .po), no a issues de GitHub.
+  - Asignarse un issue (= reclamarlo): en la web, barra lateral
+    "Assignees" > assign yourself; o con la CLI:
+      gh issue edit N --repo qdiazblanco/Robo --add-assignee @me
+
+
+FLUJO DE UN PR, PASO A PASO
+---------------------------------------------------------------------
+
+    1- git switch Spanish-translation && git pull
+    2- git switch -c (nombre del issue)        # una rama por issue
+
+    3- # ... editar .i18n/es/Game.po (solo las entradas del bloque) ...
+
+    4- msgfmt -c -o /dev/null .i18n/es/Game.po    # validar formato
+    5- python3 .i18n/check_po.py es               # validar placeholders
+    
+    6- git add .i18n/es/Game.po
+    7- git commit -m "Revisión de Logo (#¿?-#¿?)"
+    8- git push 
+
+  (4 y 5 opcionales pero ahorra tiempo y deja mas limpio el historial
+   del repo porque así el CI no tiene que hacer nada).
+   
+  Después, abrir el PR CONTRA LA RAMA Spanish-translation (¡no contra
+  main!) con "Closes #<issue>" en la descripción.
+
+  Reglas de edición del .po:
+  - Editar SOLO los msgstr; jamás los msgid ni los comentarios #:/#.
+  - Conservar los placeholders §n (número y repeticiones), el
+    markdown y los saltos de línea, sobre todo los pegados a un
+    placeholder.
+  - Puntos suspensivos: el carácter … (unicode), no tres puntos.
+  - NO tocar Game.json: se regenera automáticamente.
+  - Dudas terminológicas que afecten a varios planetas: comentarlas
+    en el issue 16 (Terminología global), no decidirlas en un PR
+    aislado.
+
+
+QUÉ HACE EL CI AUTOMÁTICAMENTE
+---------------------------------------------------------------------
+
+  1. "Validar traducciones" (validate-translation.yml): en cada PR
+     (y cada push a Spanish-translation) que toque un Game.po,
+     ejecuta msgfmt -c sobre todos los idiomas y check_po.py sobre
+     el español. Si algo está roto, el PR sale en rojo con el detalle.
+
+  2. "Regenerar Game.json" (regenerate-json.yml): tras cada push o
+     merge a Spanish-translation que cambie es/Game.po, regenera
+     es/Game.json y, si cambió, lo commitea como github-actions[bot].
+     Por eso los PRs no deben tocar el json: se mantiene solo.
+
+  Tras cada merge conviene hacer git pull (para traer también el
+  commit del bot) y, si se quiere, pedir que se regenere
+  revision-es.html con el texto actualizado.
+
+
+DECISIONES DE TRADUCCIÓN YA FIJADAS (resumen)
+---------------------------------------------------------------------
+
+  La lista completa y viva está en el issue 16 de GitHub.
+
+  Glifo (Robo/Scribble) - Formaloverso - leanés (minúscula) - Bazar
+  (Piazza) - Etiopía (Robotswana/Ethiopia) - Traza (Tracy) - tuteo y
+  "vosotros", género del jugador neutro - aplicación (map) -
+  sobreyectiva - objetivo (goal) - demostración por contradicción -
+  distinción de casos - conjunto de partes - el cardinal -
+  imagen/preimagen POR f - desplegar la definición (unfold) -
+  puntos suspensivos … en unicode.
+
+
+AL TERMINAR LA REVISIÓN
+---------------------------------------------------------------------
+
+  1. Cerrar el issue de terminología actualizando
+     .i18n/es/glossary.csv con los términos nuevos.
+  2. Comprobación final: msgfmt -c + check_po.py es + partida de
+     prueba en el juego si es posible.
+  3. Abrir UN ÚNICO PR desde el fork (Spanish-translation) hacia
+     hhu-adam/Robo main, mencionando la guía de traducción del
+     proyecto. Los workflows y scripts añadidos (po2json.py,
+     check_po.py, actions) pueden incluirse en ese PR o retirarse
+     antes, según prefieran los autores.
