@@ -3970,7 +3970,7 @@ msgid "Explain that §0 and §1 with §2 can be used as in Implis"
 msgstr ""
 "**Tú**: Tengo la sensación de que esto ya lo he visto antes.\n"
 "\n"
-"**Glifo**:  ¡Sí!  Se parece mucho a un problema que ya resolvimos en *Implis*. ¡Solo que aquí aparecen igualdades de números en lugar de enunciados de "si y solo si"! Pero en el fondo eso no supone ninguna diferencia. Puedes manejar §0 y §1 con §2 prácticamente de la misma forma."
+"**Glifo**:  ¡Sí!  Se parece mucho a un problema que ya resolvimos en *Implis*. ¡Solo que aquí aparecen igualdades de números en lugar de enunciados de \"si y solo si\"! Pero en el fondo eso no supone ninguna diferencia. Puedes manejar §0 y §1 con §2 prácticamente de la misma forma."
 
 #. §0: `rw [hₓ]`
 #. §1: `rw [← hₓ]`
