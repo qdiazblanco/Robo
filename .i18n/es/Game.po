@@ -117,7 +117,7 @@ msgid "For a self-mapping §0 and an element §1, §2 is the expression §3.\n"
 "Look up definition with §4."
 msgstr ""
 "Para una aplicación §0 de un conjunto en sí mismo y un elemento §1, §2 es el enunciado §3.\n"
-"Puedes desplegar la definición fácilmente usando §3."
+"Puedes desplegar la definición fácilmente usando §4."
 
 #. §0: `f : A → A`
 #. §1: `fixedPoints f : Set A`
