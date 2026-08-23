@@ -6068,7 +6068,7 @@ msgstr "**Glifo** (*desde alguna parte*): Eso suena a §0. No creo que hayamos v
 
 #: Game/Levels/Robotswana/L08_EvalOnEBasis.lean:104
 msgid "Simplify"
-msgstr "**Tú**: Ah sí, ante la duda: simplificar.
+msgstr "**Tú**: Ah sí, ante la duda: simplificar."
 
 #. §0: `f`
 #. §1: `E i j`
@@ -6139,7 +6139,7 @@ msgstr ""
 #: Game/Levels/Robotswana/L08_EvalOnEBasis.lean:159
 msgid "[Doc.Theorem] map_sum\n"
 "Linear mapping, or 'additive' mappings in general, can be exchanged with a sum."
-msgstr "Las aplicaciones lineales (o, de manera más general, las aplicaciones "aditivas") pueden intercambiarse por una suma."
+msgstr "Las aplicaciones lineales (o, de manera más general, las aplicaciones \"aditivas\") pueden intercambiarse por una suma."
 
 #: Game/Levels/Robotswana/L09_EvalOnEBasis.lean:21
 msgid "Intro Robotswana L09"
